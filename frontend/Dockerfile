@@ -9,7 +9,8 @@ COPY frontend/package*.json ./
 RUN npm install
 
 # Copy source code
-COPY . .
+COPY frontend/src/ .
+COPY frontend/public/ .
 
 # Build the application
 RUN npm run build
