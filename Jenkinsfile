@@ -4,8 +4,8 @@ pipeline {
     environment {
         DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials')
         VPS_SSH_CREDENTIALS = credentials('vps-ssh-credentials')
-        DOCKER_REGISTRY = 'your-dockerhub-username/chattingo'
-        VPS_IP = 'your-vps-ip'
+        DOCKER_REGISTRY = 'pragya2902/chattingo'
+        VPS_IP = '98.83.13.215'
         VPS_USERNAME = 'ubuntu'
         VPS_DEPLOY_PATH = '/home/ubuntu/chattingo'
     }
