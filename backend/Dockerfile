@@ -3,11 +3,11 @@ FROM maven:3.9.11-eclipse-temurin-17 AS build
 WORKDIR /app
 
 # Copy only the files needed for downloading dependencies
-COPY pom.xml .
+COPY backend/pom.xml .
 RUN mvn -B -ntp dependency:go-offline
 
 # Copy source code and build
-COPY src/ /app/src/
+COPY backend/src/ /app/src/
 RUN mvn -B -ntp clean package -DskipTests
 
 # Stage 2: Create the runtime image
