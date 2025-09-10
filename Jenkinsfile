@@ -16,6 +16,7 @@ pipeline {
         stage('Build Backend') {
             steps {
                 script {
+                    // Build backend with context at project root
                     docker.build("${DOCKER_REGISTRY}-backend:${env.BUILD_NUMBER}", "-f backend/Dockerfile .")
                 }
             }
@@ -24,6 +25,7 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 script {
+                    // Build frontend with context at project root
                     docker.build("${DOCKER_REGISTRY}-frontend:${env.BUILD_NUMBER}", "-f frontend/Dockerfile .")
                 }
             }
