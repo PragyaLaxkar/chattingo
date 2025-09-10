@@ -25,8 +25,10 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 script {
-                    // Build frontend with context at project root
-                    docker.build("${DOCKER_REGISTRY}-frontend:${env.BUILD_NUMBER}", "-f frontend/Dockerfile .")
+                    // Change to frontend directory for build context
+                    dir('frontend') {
+                        docker.build("${DOCKER_REGISTRY}-frontend:${env.BUILD_NUMBER}", "-f Dockerfile .")
+                    }
                 }
             }
         }
