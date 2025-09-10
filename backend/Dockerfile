@@ -1,21 +1,19 @@
 # Stage 1: Build the application
-FROM maven:3.8.6-openjdk-17-slim AS build
+FROM maven:3.9.11-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY pom.xml .
-RUN mvn dependency:go-offline
+RUN mvn -B -ntp dependency:go-offline
 COPY src/ /app/src/
-RUN mvn clean package -DskipTests
+RUN mvn -B -ntp clean package -DskipTests
 
 # Stage 2: Create the runtime image
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
-# Create a non-root user and switch to it
 RUN useradd -m myuser
 USER myuser
 
-# Set environment variables with defaults
 ENV SPRING_PROFILES_ACTIVE=production \
     JWT_SECRET=your-secret-key-here \
     SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/chattingo_db \
